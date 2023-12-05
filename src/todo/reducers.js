@@ -9,7 +9,10 @@ export const todos = (state=[{text:"say hi", isCompleted: false}],action) => {
             const newTodo = {
                 text, isCompleted: false
             };
-            return state.concat(newTodo);
+            if (!(state.some(item => item.text === text))) {
+                return state.concat(newTodo);
+            }
+            else { return state; }
         }
         case REMOVE_TODO: {
             const { text } = payload;

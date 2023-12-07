@@ -2,6 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { markAsCompleted, removeTodo } from "./action";
 import { deleteTodoReq, displayAlert, markAsCompletedReq } from "./thunks";
+import { getTodos } from "./selectors";
 
 const TodoListComponentItem = ({todo,todos,onRemoveClick,onMarkAsCompleted}) => {
     return (
@@ -17,7 +18,7 @@ const TodoListComponentItem = ({todo,todos,onRemoveClick,onMarkAsCompleted}) => 
 }
 const mapStateToProps = state => {
     return {
-        todos: state.todos
+        todos: getTodos(state)
     }
 }
 const mapDispatchToProps = dispatch => {

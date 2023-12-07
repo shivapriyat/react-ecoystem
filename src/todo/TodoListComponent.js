@@ -4,6 +4,7 @@ import NewTodoForm from "./NewTodoForm";
 import { connect } from "react-redux";
 import { useEffect } from "react";
 import { loadTodos } from "./thunks";
+import { getTodos, getTodosLoading } from "./selectors";
 
 
 const TodoListComponent = ({todos=[],startTodos,isLoading}) => {
@@ -27,7 +28,7 @@ const TodoListComponent = ({todos=[],startTodos,isLoading}) => {
     return isLoading ? loadingPage : content;
 };
 const mapStateToProps = state => {
-    return {todos: state.todos, isLoading: state.isLoading};
+    return {todos: getTodos(state), isLoading: getTodosLoading(state)};
 };
 const mapDispatchToProps = dispatch => {
     return {

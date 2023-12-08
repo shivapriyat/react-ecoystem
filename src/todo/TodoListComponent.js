@@ -4,10 +4,10 @@ import NewTodoForm from "./NewTodoForm";
 import { connect } from "react-redux";
 import { useEffect } from "react";
 import { loadTodos } from "./thunks";
-import { getTodos, getTodosLoading } from "./selectors";
+import { getCompleteTodos, getIncompleteTodos, getTodos, getTodosLoading } from "./selectors";
 
 
-const TodoListComponent = ({todos=[],startTodos,isLoading}) => {
+const TodoListComponent = ({todos=[],startTodos,isLoading,incompleteTodos,completeTodos}) => {
     //console.log(todos.length);
     useEffect(()=>{
      startTodos();
@@ -16,9 +16,18 @@ const TodoListComponent = ({todos=[],startTodos,isLoading}) => {
     //let content = <div>data loaded {todos.length}</div>
     let content =    <>
         <NewTodoForm todos={todos} />
+        <h3>Incomplete Todos</h3>
        <ul>
         {
-            todos.map(todo => {
+            incompleteTodos.map(todo => {
+                return (<TodoListComponentItem key={todo.text} todo={todo} todos={todos} />);
+            })
+        }
+       </ul>
+       <h3>Complete Todos</h3>
+       <ul>
+        {
+            completeTodos.map(todo => {
                 return (<TodoListComponentItem key={todo.text} todo={todo} todos={todos} />);
             })
         }
@@ -28,7 +37,12 @@ const TodoListComponent = ({todos=[],startTodos,isLoading}) => {
     return isLoading ? loadingPage : content;
 };
 const mapStateToProps = state => {
-    return {todos: getTodos(state), isLoading: getTodosLoading(state)};
+    return {
+        todos: getTodos(state), 
+        incompleteTodos: getIncompleteTodos(state),
+        completeTodos: getCompleteTodos(state),
+        isLoading: getTodosLoading(state)
+    };
 };
 const mapDispatchToProps = dispatch => {
     return {

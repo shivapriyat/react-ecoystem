@@ -5,7 +5,12 @@ import { connect } from "react-redux";
 import { useEffect } from "react";
 import { loadTodos } from "./thunks";
 import { getCompleteTodos, getIncompleteTodos, getTodos, getTodosLoading } from "./selectors";
+import styled from "styled-components";
 
+const BigRedText = styled.div`
+    font-size: 18px;
+    color: red;
+`;
 
 const TodoListComponent = ({todos=[],startTodos,isLoading,incompleteTodos,completeTodos}) => {
     //console.log(todos.length);
@@ -15,6 +20,7 @@ const TodoListComponent = ({todos=[],startTodos,isLoading,incompleteTodos,comple
     let loadingPage = <div>Loading data...</div>
     //let content = <div>data loaded {todos.length}</div>
     let content =    <>
+         <BigRedText>I am styled component.</BigRedText>
         <NewTodoForm todos={todos} />
         <h3>Incomplete Todos</h3>
        <ul>

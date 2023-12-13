@@ -21,13 +21,14 @@ const TodoListItemButtonContainer = styled.div`
 text-align: end;
 `;
 
-const CompletedButton = styled.button`
-background-color: green;
- margin: 1rem;
-`;
-const RemoveButton = styled.button`
-background-color: red; 
+const Button = styled.button`
 margin: 1rem;
+`;
+const CompletedButton = styled(Button)`
+background-color: green;
+`;
+const RemoveButton = styled(Button)`
+background-color: red;
 `;
 const TodoListComponentItem = ({todo,todos,onRemoveClick,onMarkAsCompleted}) => {
     const Container = todo.isCompleted ? TodoListComponentItemContainer : TodoListItemContainerPriority;

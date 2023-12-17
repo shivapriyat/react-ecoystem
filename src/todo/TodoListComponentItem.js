@@ -12,8 +12,11 @@ border: 1px solid black;
   
 `;
 
+export const getBorderBottomBasedOnDate = (createdDate, today) =>{
+    return createdDate > new Date(today  - 8640000 * 5) ? "1px solid black": "2px solid red";
+}
 const TodoListItemContainerPriority = styled(TodoListComponentItemContainer)`
-border-bottom: ${props => new Date(props.createdAt) > new Date(Date.now())  - 8640000 * 5 ? "1px solid black": "2px solid red"}
+border-bottom: ${props => getBorderBottomBasedOnDate(new Date(props.createdAt), Date.now())};
 `;
 
 
